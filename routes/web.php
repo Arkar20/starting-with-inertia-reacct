@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return inertia('Home');
+    return inertia('Home',['time'=>now()->toTimeString()]);
 });
 Route::get('/about', function () {
     return inertia('About');
