@@ -19,6 +19,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return inertia('About');
 });
-Route::get('/signout', function () {
-    return inertia('Logout');
+Route::post('/signout', function () {
+   dd(request()->all());
 });
