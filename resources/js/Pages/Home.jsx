@@ -1,11 +1,9 @@
 import { Link } from "@inertiajs/inertia-react";
-import Nav from "../Shared/Nav";
 import React from "react"
-
+import Layout from "../Shared/Layout";
 const Home = ({time}) => {
-  return (
-    <>
-      <Nav />
+    return (
+      <>
           <div style={{ height: "100vh" }}>
               <h1>Hello world homepage</h1>
               <h4>Time is {time}</h4>
@@ -15,8 +13,11 @@ const Home = ({time}) => {
               <Link href="/" preserveScroll>
                   Refresh
               </Link>
-          </div>
-      </>
+            </div>
+        </>
   );
 }
+
+Home.layout = (page) => <Layout children={page} title="Home Page" />;
+
 export default Home;  
