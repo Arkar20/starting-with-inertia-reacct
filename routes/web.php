@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return inertia('Home',['time'=>now()->toTimeString()]);
+Route::get('/users', function () {
+    $users=User::where('name','like','%'.request()->get('search').'%')->paginate(10);
+
+
+    return inertia('Home',['time'=>now()->toTimeString(),'users'=>$users,'search'=>request()->get('search')]);
 });
 Route::get('/about', function () {
     return inertia('About');

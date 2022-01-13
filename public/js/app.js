@@ -2128,17 +2128,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Shared/Layout */ "./resources/js/Shared/Layout.jsx");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
 
 
 
 
 var Home = function Home(_ref) {
-  var time = _ref.time;
+  var time = _ref.time,
+      users = _ref.users,
+      search = _ref.search;
+  console.log(users);
+
+  var handleOnChange = function handleOnChange(e) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get("/users", {
+      search: e.target.value
+    }, {
+      preserveState: true
+    });
+  };
+
+  var userList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("tbody", {
+    className: "p-3"
+  }, users.data.map(function (user) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("tr", {
+      key: user.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("td", null, user.name));
+  }), !users.data.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "No Users Has Found")));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     style: {
       height: "100vh"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Hello world homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Time is ", time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Hello world homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Time is ", time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+    type: "text",
+    className: "p-2 border-1 ",
+    placeholder: "Search...",
+    value: search,
+    onChange: handleOnChange
+  }), userList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", {
+    className: "flex gap-x-3 "
+  }, users.links.map(function (link, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+      key: index,
+      href: link.url,
+      preserveScroll: true,
+      dangerouslySetInnerHTML: {
+        __html: link.label
+      },
+      className: "p-2 ".concat(link.active ? "bg-gray-700 text-white " : "")
+    });
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "preserve-scroll"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
     href: "/",
