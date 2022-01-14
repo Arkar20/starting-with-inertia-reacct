@@ -2149,7 +2149,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // import { debounce } from 'lodash/throttle';
 
 var Home = function Home(_ref) {
   var time = _ref.time,
@@ -2163,13 +2163,19 @@ var Home = function Home(_ref) {
 
   var handleChange = function handleChange(e) {
     setsearchKeyWord(e.target.value);
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.get("/users", {
-      search: e.target.value
+    reduceReq(e.target.value);
+  };
+
+  var reduceReq = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(lodash_throttle__WEBPACK_IMPORTED_MODULE_5___default()(function (value) {
+    return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.get("/users", {
+      search: value
     }, {
       preserveState: true
     });
-  }; //  const reduceHttpReq = useCallback(() => throttle((nextValue)=>{}, 500));
-
+  }, 1000), []); // const reduceHttpReq = useCallback(
+  //     debounce((nextValue) => {
+  //     }, 500)
+  // );
 
   var userList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "Name"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", {
     className: "p-3"

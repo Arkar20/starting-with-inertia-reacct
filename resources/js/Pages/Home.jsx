@@ -4,7 +4,9 @@ import { Inertia } from "@inertiajs/inertia";
 import Layout from "../Shared/Layout";
 import { Link } from "@inertiajs/inertia-react";
 import Paginator from "../Shared/Paginator";
-import  throttle  from 'lodash/throttle';
+import  debounce  from 'lodash/throttle';
+
+// import { debounce } from 'lodash/throttle';
 
 const Home = ({ time, users, search }) => {
 
@@ -15,15 +17,17 @@ const Home = ({ time, users, search }) => {
     const handleChange = (e) => {
       
         setsearchKeyWord(e.target.value);
-             Inertia.get(
-                 "/users",
-                 { search: e.target.value },
-                 { preserveState: true }
-             );
-        
-   }
+            
+        reduceReq(e.target.value);
+    }
+    const reduceReq = useCallback(debounce((value) =>
+        Inertia.get("/users", { search: value }, { preserveState: true }),1000),[])
 
-//  const reduceHttpReq = useCallback(() => throttle((nextValue)=>{}, 500));
+    // const reduceHttpReq = useCallback(
+    //     debounce((nextValue) => {
+           
+    //     }, 500)
+    // );
 
    
 
