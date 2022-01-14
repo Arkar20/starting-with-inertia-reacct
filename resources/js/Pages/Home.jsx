@@ -1,20 +1,39 @@
-import { Link } from "@inertiajs/inertia-react";
-import React,{useState,useEffect} from "react"
-import Layout from "../Shared/Layout";
+import React, { useCallback, useState } from "react";
+
 import { Inertia } from "@inertiajs/inertia";
+import Layout from "../Shared/Layout";
+import { Link } from "@inertiajs/inertia-react";
+import Paginator from "../Shared/Paginator";
+import  throttle  from 'lodash/throttle';
+
 const Home = ({ time, users, search }) => {
-    console.log(users);
-    const handleOnChange = (e) => {
-        Inertia.get(
-            "/users",
-            { search: e.target.value },
-            { preserveState: true }
-        );
-    };
+
+    const [searchKeyWord, setsearchKeyWord] = useState("");
+
+   
+    
+    const handleChange = (e) => {
+      
+        setsearchKeyWord(e.target.value);
+             Inertia.get(
+                 "/users",
+                 { search: e.target.value },
+                 { preserveState: true }
+             );
+        
+   }
+
+//  const reduceHttpReq = useCallback(() => throttle((nextValue)=>{}, 500));
+
+   
 
     const userList = (
         <table>
-            <th>Name</th>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                </tr>
+           </thead>
 
             <tbody className="p-3">
                 {users.data.map((user) => (
@@ -36,24 +55,12 @@ const Home = ({ time, users, search }) => {
                     type="text"
                     className="p-2 border-1 "
                     placeholder="Search..."
-                    value={search}
-                    onChange={handleOnChange}
+                    value={searchKeyWord}
+                    onChange={handleChange}
                 />
                 {userList}
 
-                <ul className="flex gap-x-3 ">
-                    {users.links.map((link, index) => (
-                        <Link
-                            key={index}
-                            href={link.url}
-                            preserveScroll
-                            dangerouslySetInnerHTML={{ __html: link.label }}
-                            className={`p-2 ${
-                                link.active ? "bg-gray-700 text-white " : ""
-                            }`}
-                        ></Link>
-                    ))}
-                </ul>
+                <Paginator links={users.links} />
             </div>
             <div className="preserve-scroll">
                 <Link href="/" preserveScroll>
