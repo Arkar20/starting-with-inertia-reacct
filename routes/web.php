@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,32 @@ Route::post('/user/register',function(){
    $attributes= request()->validate(['name'=>"required",'email'=>'required|email','password'=>'required']);
 
     User::create($attributes);
+
+    return redirect()->route('users.index');
+});
+
+Route::get('/login',function(){
+    return inertia('User/Login');
+});
+Route::post('/login',function(Request $request){
+       $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/users');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+});
+
+Route::post('logout',function(){
+    Auth::logout();
 
     return redirect()->route('users.index');
 });

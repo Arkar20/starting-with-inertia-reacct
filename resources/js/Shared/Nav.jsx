@@ -16,6 +16,12 @@ const Nav = () => {
                     <NavLink to="/register" baseComponent="User/Create">
                         Register
                     </NavLink>
+                    <NavLink to="/login" baseComponent="User/Login">
+                            Login
+                    </NavLink>
+                    <NavLink to="/logout" method="post">
+                            Logout
+                    </NavLink>
                     <input
                         type="text"
                         className="p-2 w-75 border-1 border-grey-600"

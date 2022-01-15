@@ -2320,6 +2320,72 @@ var Create = function Create() {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/User/Login.jsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Pages/User/Login.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+
+
+var Login = function Login() {
+  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__.useForm)({
+    email: "",
+    password: ""
+  }),
+      data = _useForm.data,
+      setData = _useForm.setData,
+      post = _useForm.post,
+      progress = _useForm.progress,
+      errors = _useForm.errors;
+
+  var handleLogin = function handleLogin(e) {
+    e.preventDefault();
+    post('/login');
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    onSubmit: handleLogin,
+    className: "flex justify-center items-center min-h-screen"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "p-5 border border-1 space-y-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-3xl"
+  }, "Login page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "text",
+    value: data.email,
+    onChange: function onChange(e) {
+      return setData("email", e.target.value);
+    },
+    placeholder: "enter your email",
+    className: "block w-full py-2 border border-1 border-grey-400"
+  }), errors.email && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "text-red-600 text-xs"
+  }, errors.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "password",
+    value: data.password,
+    onChange: function onChange(e) {
+      return setData("password", e.target.value);
+    },
+    placeholder: "enter your password",
+    className: "block w-full px-4  py-2 border border-1 border-gray-400"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "submit"
+  }, "Login")));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Layout.jsx":
 /*!****************************************!*\
   !*** ./resources/js/Shared/Layout.jsx ***!
@@ -2379,7 +2445,13 @@ var Nav = function Nav() {
   }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_NavLink__WEBPACK_IMPORTED_MODULE_0__["default"], {
     to: "/register",
     baseComponent: "User/Create"
-  }, "Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+  }, "Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_NavLink__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    to: "/login",
+    baseComponent: "User/Login"
+  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_NavLink__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    to: "/logout",
+    method: "post"
+  }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
     type: "text",
     className: "p-2 w-75 border-1 border-grey-600"
   })));
@@ -37381,7 +37453,9 @@ var map = {
 	"./Logout": "./resources/js/Pages/Logout.jsx",
 	"./Logout.jsx": "./resources/js/Pages/Logout.jsx",
 	"./User/Create": "./resources/js/Pages/User/Create.jsx",
-	"./User/Create.jsx": "./resources/js/Pages/User/Create.jsx"
+	"./User/Create.jsx": "./resources/js/Pages/User/Create.jsx",
+	"./User/Login": "./resources/js/Pages/User/Login.jsx",
+	"./User/Login.jsx": "./resources/js/Pages/User/Login.jsx"
 };
 
 
