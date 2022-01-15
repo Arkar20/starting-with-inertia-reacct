@@ -1,20 +1,20 @@
 import React,{useState} from "react";
 
 import {Inertia} from '@inertiajs/inertia'
+import { useForm } from "@inertiajs/inertia-react";
 import { usePage } from "@inertiajs/inertia-react";
 
 const Create = () => {
 
-    const { errors } = usePage().props;
 
-
-  const [name,setName]=useState('')
-  const [email,setEmail]=useState('')
-  const [password, setPassword] = useState('')
-  
+  const { data, setData, post, processing, errors } = useForm({
+    name:"",
+    email: "",
+    password: "",
+});
   const handleSubmit = (e) => {
     e.preventDefault();
-    Inertia.post('/user/register', { name, email, password });
+    post('/user/register');
   }
   
   return (
@@ -28,29 +28,40 @@ const Create = () => {
                   type="text"
                   className="block p-3 w-full"
                   placeholder="Enter Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={data.name}
+                  onChange={(e) => setData("name", e.target.value)}
               />
-              {errors.name && <span className="text-red-600 text-xs">{errors.name}</span>}
+              {errors.name && (
+                  <span className="text-red-600 text-xs">{errors.name}</span>
+              )}
               <input
                   type="text"
                   className="block p-3 w-full"
                   placeholder="Enter Your Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={data.email}
+                  onChange={(e) => setData("email", e.target.value)}
               />
-              {errors.email && <span  className="text-red-600 text-xs">{errors.email}</span>}
+              {errors.email && (
+                  <span className="text-red-600 text-xs">{errors.email}</span>
+              )}
 
               <input
                   type="password"
                   className="block p-3 w-full"
                   placeholder="Enter Your Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={data.password}
+                  onChange={(e) => setData("password", e.target.value)}
               />
-              {errors.password && <span className="text-red-600 text-xs">{errors.password}</span>}
+              {errors.password && (
+                  <span className="text-red-600 text-xs">
+                      {errors.password}
+                  </span>
+              )}
 
-              <button className="block py-2 px-4 bg-blue-400 text-white">
+              <button
+                  className="block py-2 px-4 bg-blue-400 text-white disabled:bg-black"
+                  disabled={processing}
+              >
                   Register
               </button>
           </form>

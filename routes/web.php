@@ -33,7 +33,7 @@ Route::get('/register',function(){
 });
 Route::post('/user/register',function(){
 
-
+    // sleep(5);
    $attributes= request()->validate(['name'=>"required",'email'=>'required|email','password'=>'required']);
 
     User::create($attributes);
