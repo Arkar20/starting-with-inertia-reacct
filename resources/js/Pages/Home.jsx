@@ -4,7 +4,7 @@ import { Inertia } from "@inertiajs/inertia";
 import Layout from "../Shared/Layout";
 import { Link } from "@inertiajs/inertia-react";
 import Paginator from "../Shared/Paginator";
-import  debounce  from 'lodash/throttle';
+import debounce from "lodash/debounce";
 
 // import { debounce } from 'lodash/throttle';
 
